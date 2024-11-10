@@ -6,6 +6,7 @@ import Items from './components/items';
 import Footer from './components/footer';
 import ProductRegistration from './components/productRegistration';
 import LandingPage from './components/landingpage'
+import FreeBoard from './components/freeboard'
 
 
 
@@ -17,7 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/items" element={<Items />} />
-        <Route path="/registration" element={<ProductRegistration />} /> 
+        <Route path="/registration" element={<ProductRegistration />} />
+        <Route path="/freeboard" element={<FreeBoard />} /> 
       </Routes>
       <Footer />
     </div>

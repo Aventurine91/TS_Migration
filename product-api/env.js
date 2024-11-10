@@ -1,5 +1,5 @@
 
-const DATABASE_URL = 'mongodb+srv://mandely01:3kv9%4095XYqY3hwM@cluster0.p1ix7.mongodb.net/codeit?retryWrites=true&w=majority&appName=Cluster0';
+const DATABASE_URL = "postgresql://postgre:test9022@shinhye-good-test.clyykg4uudn5.ap-southeast-2.rds.amazonaws.com/mydb?schema=public";
 module.exports = { DATABASE_URL };
 
 
