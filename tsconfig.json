@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"]
+    },
+    "types": ["node"]
+  },
+  "include": ["src/**/*", "postcss.config.cjs", "tailwind.config.cjs","src/react-app-env.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

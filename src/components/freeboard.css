@@ -1,0 +1,41 @@
+.freeboard-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.best-posts {
+  padding: 20px;
+}
+
+.best-posts h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.best-posts-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.post-card, .post-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.write-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
