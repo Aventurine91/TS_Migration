@@ -1,7 +1,6 @@
-// src/components/Header.js
 import React from 'react';
 import './header.css';  
-import pandaFace from './icons/panda_face.png';
+import pandaFace from './img/panda_face.png';
 import { Link, useLocation } from 'react-router-dom';
 
 

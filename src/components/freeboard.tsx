@@ -1,12 +1,18 @@
-// src/components/FreeBoard.js
-import React, { useState, useEffect } from 'react';
+// src/components/FreeBoard.tsx
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import './freeboard.css';
 
-function FreeBoard() {
-  const [bestPosts, setBestPosts] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('recent');
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
+
+const FreeBoard: React.FC = () => {
+  const [bestPosts, setBestPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [sortOption, setSortOption] = useState<'recent' | 'popular'>('recent');
 
   useEffect(() => {
     // API 호출로 베스트 게시글과 일반 게시글을 가져옴
@@ -14,21 +20,31 @@ function FreeBoard() {
     fetchPosts();
   }, [sortOption]);
 
-  const fetchBestPosts = async () => {
+  const fetchBestPosts = async (): Promise<void> => {
     // 베스트 게시글 가져오기 API 호출
-    const response = await fetch('http://localhost:8000/api/freeboard/best');
-    const data = await response.json();
-    setBestPosts(data);
+    try {
+      const response = await fetch('http://localhost:8000/api/freeboard/best');
+      const data: Post[] = await response.json();
+      setBestPosts(data);
+    } catch (error) {
+      console.error('Failed to fetch best posts:', error);
+    }
   };
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (): Promise<void> => {
     // 일반 게시글 가져오기 API 호출
-    const response = await fetch(`http://localhost:8000/api/freeboard?sort=${sortOption}&search=${searchTerm}`);
-    const data = await response.json();
-    setPosts(data);
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/freeboard?sort=${sortOption}&search=${searchTerm}`
+      );
+      const data: Post[] = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+    }
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
     fetchPosts();
   };
@@ -57,7 +73,10 @@ function FreeBoard() {
             value={searchTerm}
             onChange={handleSearch}
           />
-          <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value as 'recent' | 'popular')}
+          >
             <option value="recent">최신순</option>
             <option value="popular">인기순</option>
           </select>
@@ -74,6 +93,7 @@ function FreeBoard() {
       </section>
     </div>
   );
-}
+};
 
 export default FreeBoard;
+
