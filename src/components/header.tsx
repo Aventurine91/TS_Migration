@@ -3,18 +3,16 @@ import './header.css';
 import pandaFace from './img/panda_face.png';
 import { Link, useLocation } from 'react-router-dom';
 
-
-
-function Header() {
+function Header(): JSX.Element {
   const location = useLocation();
-  const isItemsPage = location.pathname === '/items'; // '판매중인상품' 경로가 '/items'라 가정
+  const isItemsPage = location.pathname === '/items'; 
 
   return (
     <header className="header">
       <div className="left">
         <div className="logo">
           <Link to="/" className="logo">
-            <img src={pandaFace} alt="판다마켓로고" />
+            <img src={pandaFace} alt="판다마켓 로고" />
             <h1 className="panda_text">판다마켓</h1>
           </Link>
         </div>

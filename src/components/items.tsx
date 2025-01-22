@@ -6,6 +6,7 @@ import defaultImage from './icons/img_default.svg'
 //React.FC 사용 지양하는 이유
 //React.FC를 사용하면 props에 children이 자동으로 포함되어 있어서 명시적으로 children을 사용하지 않아도 된다.
 //하지만 이렇게 사용하면 children이 필수적으로 포함되어 있다는 것을 알 수 없다. 개까다롭다 휴휴휴
+//https://stackoverflow.com/questions/58123398/when-to-use-jsx-element-vs-reactnode-vs-reactelement 해당 링크에 JSX.Element, ReactNode, and ReactElement 비교정리되어있음
 
 interface Product {
   id: string;
