@@ -3,13 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import './items.css';
 import defaultImage from './icons/img_default.svg'
 
-function Items() {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+//React.FC 사용 지양하는 이유
+//React.FC를 사용하면 props에 children이 자동으로 포함되어 있어서 명시적으로 children을 사용하지 않아도 된다.
+//하지만 이렇게 사용하면 children이 필수적으로 포함되어 있다는 것을 알 수 없다. 개까다롭다 휴휴휴
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  images: string[];
+  favoriteCount?: number;
+  createdAt: string;
+}
+
+
+function Items(): JSX.Element {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
-    const [sortOption, setSortOption] = useState('latest'); // 정렬 옵션 상태
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [searchTerm, setSearchTerm] = useState<string>(''); // 검색어 상태
+    const [sortOption, setSortOption] = useState<'latest' | 'favorite'>('latest'); // 정렬 옵션 상태
     const itemsPerPage = 5;
 
     useEffect(() => {
@@ -27,7 +41,7 @@ function Items() {
     }, []);
 
       // "상품 등록하기" 버튼 클릭 핸들러
-  const handleRegisterClick = () => {
+  const handleRegisterClick = (): void=> {
     navigate('/registration'); // "/registration" 경로로 이동
   };
 
@@ -38,9 +52,9 @@ function Items() {
         )
         .sort((a, b) => {
             if (sortOption === 'latest') {
-                return new Date(b.createdAt) - new Date(a.createdAt);
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
             } else if (sortOption === 'favorite') {
-                return b.favoriteCount - a.favoriteCount;
+                return (b.favoriteCount || 0) - (a.favoriteCount || 0);
             }
             return 0;
         });
@@ -53,7 +67,7 @@ function Items() {
     // 전체 페이지 수 계산
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
-    const handlePageChange = (pageNumber) => {
+    const handlePageChange = (pageNumber : number) => {
         setCurrentPage(pageNumber);
     };
 
@@ -72,7 +86,7 @@ function Items() {
                 <select
                     className="sort-dropdown"
                     value={sortOption}
-                    onChange={(e) => setSortOption(e.target.value)}
+                    onChange={(e) => setSortOption(e.target.value as 'latest' | 'favorite')}
                 >
                     <option value="latest">최신순</option>
                     <option value="favorite">좋아요순</option>
