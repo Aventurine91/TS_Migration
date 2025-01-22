@@ -16,14 +16,14 @@ function FreeBoard() {
 
   const fetchBestPosts = async () => {
     // 베스트 게시글 가져오기 API 호출
-    const response = await fetch('/api/freeboard/best');
+    const response = await fetch('http://localhost:8000/api/freeboard/best');
     const data = await response.json();
     setBestPosts(data);
   };
 
   const fetchPosts = async () => {
     // 일반 게시글 가져오기 API 호출
-    const response = await fetch(`/api/freeboard?sort=${sortOption}&search=${searchTerm}`);
+    const response = await fetch(`http://localhost:8000/api/freeboard?sort=${sortOption}&search=${searchTerm}`);
     const data = await response.json();
     setPosts(data);
   };
