@@ -7,7 +7,10 @@ import HomeImg04 from './img/Img_home_03.png'
 import HomeImg05 from './img/Img_home_bottom.png'
 import { Link } from 'react-router-dom';
 
-function LandingPage() {
+
+interface LandingPageProps {}
+
+const  LandingPage = (props: LandingPageProps): JSX.Element => {
   return (
     <div className="landing-page">
       <header className="landing-header">
