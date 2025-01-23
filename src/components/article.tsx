@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import './article.css';
 
-function Article() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [image, setImage] = useState(null);
 
-  const handleImageUpload = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+
+
+const Article = (): JSX.Element => { 
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [image, setImage] = useState<string | null>(null);
+
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+      
+    }
   };
 
   return (
