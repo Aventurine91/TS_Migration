@@ -5,7 +5,10 @@ import twitterIcon from './icons/ic_twitter.png';
 import youtubeIcon from './icons/ic_youtube.png';
 import instagramIcon from './icons/ic_instagram.png';
 
-function Footer() {
+interface FooterProps {}
+
+
+const Footer = (props: FooterProps): JSX.Element => {
     return (
         <footer className="footer">
             <div className="footer-content">
