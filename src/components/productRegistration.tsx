@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './productRegistration.css';
 
-function ProductRegistration() {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [tags, setTags] = useState('');
+const ProductRegistration = (): JSX.Element => {
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [price, setPrice] = useState<string>('');
+  const [tags, setTags] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) : Promise<void> => {
     e.preventDefault();
 
     // 상품 데이터 객체 생성
@@ -45,50 +45,46 @@ function ProductRegistration() {
   };
 
   return (
-    <section className="product-registration">
-        <div className="registration-header">
-        <h2>상품 등록하기</h2>
-        <button onClick={handleSubmit}>등록</button>
-      </div>
-      <form>
-        <label>상품명</label>
+    <form className="product-registration-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="name">상품명</label>
         <input
           type="text"
+          id="name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="상품명을 입력해주세요"
-          required
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
         />
-        
-        <label>상품 소개</label>
+      </div>
+      <div className="form-group">
+        <label htmlFor="description">상품 설명</label>
         <textarea
+          id="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="상품 소개를 입력해주세요"
-          required
-        ></textarea>
-        
-        <label>판매 가격</label>
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="판매 가격을 입력해주세요"
-          required
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
         />
-        
-        <label>태그</label>
+      </div>
+      <div className="form-group">
+        <label htmlFor="price">가격</label>
         <input
           type="text"
-          value={tags}
-          onChange={(e) => setTags(e.target.value)}
-          placeholder="태그를 콤마(,)로 구분하여 입력해주세요"
+          id="price"
+          value={price}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPrice(e.target.value)}
         />
-        
-        
-      </form>
-    </section>
+      </div>
+      <div className="form-group">
+        <label htmlFor="tags">태그</label>
+        <input
+          type="text"
+          id="tags"
+          value={tags}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setTags(e.target.value)}
+        />
+      </div>
+      <button type="submit">등록하기</button>
+    </form>
   );
-}
+};
 
 export default ProductRegistration;
+
